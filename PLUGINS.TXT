@@ -1,0 +1,1 @@
+vsh, ms0:/SEPLUGINS/emu_ctrl_test.prx, on

@@ -169,7 +169,7 @@ int main_thread(SceSize args, void *argp)
     // Setup
     //
 
-    DEBUG_PRINT("Setting controller input handler for " str(CONTROLLER_PORT) "\n");
+    DEBUG_PRINT("Setting controller input handler for " xstr(CONTROLLER_PORT) "\n");
 
     // sceCtrl_driver_6C86AF22() enables passing through controller state from a specific external controller port buffer
     // into the emulation state slot with the same index as the port.
@@ -221,7 +221,7 @@ int main_thread(SceSize args, void *argp)
     // Cleanup
     //
     if(ctrl_input_handler_res == SCE_ERROR_OK) {
-        DEBUG_PRINT("Unsetting controller input handler for " str(CONTROLLER_PORT) "\n");
+        DEBUG_PRINT("Unsetting controller input handler for " xstr(CONTROLLER_PORT) "\n");
 
         result = sceCtrl_driver_E467BEC8(CONTROLLER_PORT, NULL, NULL);
         if(result < 0) {

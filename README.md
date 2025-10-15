@@ -13,9 +13,7 @@ If you enable this plugin in the XMB, you can finally navigate the XMB using the
 
 The function [`sceCtrl_driver_E467BEC8()`](https://github.com/uofw/uofw/blob/7ca6ba13966a38667fa7c5c30a428ccd248186cf/src/kd/ctrl/ctrl.c#L902-L924) is used to register a controller input handler that provides data to the DS3 external controller port buffer. This uses the same mechanism that the PSP Go's padsvc module uses to send real DS3 input data to the controller driver.
 
-The [`sceCtrl_driver_6C86AF22()`](https://github.com/uofw/uofw/blob/7ca6ba13966a38667fa7c5c30a428ccd248186cf/src/kd/ctrl/ctrl.c#L1180-L1184) function is used to enable reading of DS3 controller state through the standard read buffer methods (eg `sceCtrlPeekBufferPositive()`), so most applications will transparently receive the emulated data.
-
-A vtimer runs at 100hz and samples the analog input using `sceCtrlPeekBufferPositive()`. It translates the analog input into button values and writes the bitfield into a global variable. When the controller input handler runs, it checks the global variable for any asserted buttons, and writes them into the external controller output buffer.
+The [`sceCtrl_driver_6C86AF22()`](https://github.com/uofw/uofw/blob/7ca6ba13966a38667fa7c5c30a428ccd248186cf/src/kd/ctrl/ctrl.c#L1180-L1184) function is used to enable copying  of DS3 controller state into the controller emulation buffer, so that it can be read through the standard read buffer functions (eg `sceCtrlPeekBufferPositive()`), so most applications will transparently receive the emulated data.
 
 ## Installation
 

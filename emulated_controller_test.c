@@ -107,9 +107,17 @@ s32 ctrl_input_data_handler_func(void *pSrc, SceCtrlData2 *pDst)
     SceUInt* p_new_buttons = (SceUInt*)pSrc;
     SceUInt new_buttons = p_new_buttons != NULL ? *p_new_buttons : 0;
 
+    u8 rightX = 0;
+    u8 rightY = 0;
+
     // Demo - translate PSP analog input into DS3 directional pad buttons
     SceCtrlData pad_state;
     if(sceCtrlPeekBufferPositive(&pad_state, 1) >= 0) {
+
+        // Test: Write right stick values as inverse of left stick
+        rightX = 255 - pad_state.aX;
+        rightY = 255 - pad_state.aY;
+
         int pad_x = pad_state.aX - SCE_CTRL_ANALOG_PAD_CENTER_VALUE;
         int pad_y = pad_state.aY - SCE_CTRL_ANALOG_PAD_CENTER_VALUE;
 
@@ -148,6 +156,8 @@ s32 ctrl_input_data_handler_func(void *pSrc, SceCtrlData2 *pDst)
     pDst->TiltB = 0;
     pDst->aX = SCE_CTRL_ANALOG_PAD_CENTER_VALUE;
     pDst->aY = SCE_CTRL_ANALOG_PAD_CENTER_VALUE;
+    pDst->rX = rightX;
+    pDst->rY = rightY;
     pDst->rsrv[0] = -128;
     pDst->rsrv[1] = -128;
 
